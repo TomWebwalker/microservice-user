@@ -14,5 +14,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: my-docker-hub-namespace/my-docker-hub-repository
+          repository: tomwebwalker1docker/microservice-user
           tag_with_ref: true
