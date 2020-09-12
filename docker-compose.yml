@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  microservice-user:
+    container_name: microservice-user
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${MS_USER_NODE_PORT}:${MS_USER_NODE_PORT}
+    expose:
+      - ${MS_USER_NODE_PORT}
+    networks:
+      - app-network
+
+  nginx-reverse-proxy:
+    image: nginx:mainline-alpine
+    container_name: nginx-reverse-proxy
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx-conf:/etc/nginx/conf.d
+    depends_on:
+      - microservice-user
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

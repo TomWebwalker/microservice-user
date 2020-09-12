@@ -1,0 +1,7 @@
+node_modules
+test
+.git
+Dockerfile
+README.md
+nest-cli.json
+docker-compose.yml
