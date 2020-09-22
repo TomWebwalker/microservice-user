@@ -3,6 +3,11 @@ version: '3.3'
 services:
   microservice-user:
     container_name: microservice-user
+    environment:
+      MS_USER_DB_NAME: '${MS_USER_DB_NAME}'
+      MS_USER_DB_USER: '${MS_USER_DB_USER}'
+      MS_USER_DB_PASS: '${MS_USER_DB_PASS}'
+      MS_USER_DB_PORT: '${MS_USER_DB_PORT}'
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,6 +17,8 @@ services:
       - ${MS_USER_NODE_PORT}
     networks:
       - app-network
+    depends_on:
+      - db
 
   nginx-reverse-proxy:
     image: nginx:mainline-alpine
@@ -39,7 +46,9 @@ services:
     expose: 
       - '${MS_USER_DB_PORT}'
     volumes: 
-      - my-db:/var/lib/mysql        
+      - my-db:/var/lib/mysql     
+    networks:
+      - app-network   
 
 
   phpmyadmin:
