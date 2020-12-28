@@ -5,7 +5,7 @@ import { UserEntity } from './user.entity';
 export class User extends UserEntity {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field(type => Int)
-  id: number;
+  id?: number;
 
   @Field({ nullable: true })
   name: string;
@@ -14,8 +14,8 @@ export class User extends UserEntity {
   email: string;
 
   @Field()
-  createdAt: string;
+  createdAt?: string;
 
   @Field()
-  updatedAt: string;
+  updatedAt?: string;
 }

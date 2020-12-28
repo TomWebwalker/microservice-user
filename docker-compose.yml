@@ -8,6 +8,7 @@ services:
       MS_USER_DB_USER: '${MS_USER_DB_USER}'
       MS_USER_DB_PASS: '${MS_USER_DB_PASS}'
       MS_USER_DB_PORT: '${MS_USER_DB_PORT}'
+      MS_USER_DB_HOST: '${MS_USER_DB_HOST}'
     build:
       context: .
       dockerfile: Dockerfile

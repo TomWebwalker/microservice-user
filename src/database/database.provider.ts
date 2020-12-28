@@ -5,7 +5,7 @@ export const databaseProvider = {
   useFactory: async () =>
     await createConnection({
       type: 'mysql',
-      host: 'db',
+      host: process.env.MS_USER_DB_HOST,
       port: +process.env.MS_USER_DB_PORT,
       username: process.env.MS_USER_DB_USER,
       password: process.env.MS_USER_DB_PASS,
