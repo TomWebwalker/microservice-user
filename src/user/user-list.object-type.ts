@@ -2,10 +2,10 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { User } from './user.model';
 
 @ObjectType()
-export class UserList {
-  @Field(type => [User])
+export abstract class UserList {
+  @Field(() => [User])
   rows: User[];
 
-  @Field(type => Int)
+  @Field(() => Int)
   count: number;
 }

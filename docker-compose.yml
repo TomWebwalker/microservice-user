@@ -21,19 +21,6 @@ services:
     depends_on:
       - db
 
-  nginx-reverse-proxy:
-    image: nginx:mainline-alpine
-    container_name: nginx-reverse-proxy
-    restart: unless-stopped
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx-conf:/etc/nginx/conf.d
-    depends_on:
-      - microservice-user
-    networks:
-      - app-network
-
   db:
     image: mysql:5.7
     restart: always

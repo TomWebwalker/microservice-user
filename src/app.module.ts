@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLFederationModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
@@ -8,11 +8,10 @@ import { UserModule } from './user/user.module';
   imports: [
     DatabaseModule,
     UserModule,
-    GraphQLModule.forRoot({
+    GraphQLFederationModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       formatError: ({ message }) => ({ message }),
     }),
   ],
-  controllers: [],
 })
 export class AppModule {}

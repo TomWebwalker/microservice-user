@@ -1,29 +1,35 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { PaginationInput } from '../common/pagination.input-type';
 import { UserList } from './user-list.object-type';
 import { UserInput } from './user.input-type';
 import { User } from './user.model';
 import { UserService } from './user.service';
 
-@Resolver(of => User)
+@Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Query(returns => UserList, { nullable: true })
-  async users(): Promise<UserList> {
-    return this.userService.findAll();
+  @Query(() => UserList, { nullable: true })
+  async users(
+    @Args('pagination') pagination: PaginationInput,
+  ): Promise<UserList> {
+    return this.userService.query(pagination);
   }
 
-  @Mutation(returns => User)
+  @Mutation(() => User)
   async create(@Args('user') user: UserInput): Promise<User> {
     return this.userService.create(user);
   }
 
-  @Mutation(returns => User)
-  async update(@Args('user') user: UserInput): Promise<User> {
-    return this.userService.update(user);
+  @Mutation(() => User)
+  async update(
+    @Args('user') user: UserInput,
+    @Args({ name: 'id', type: () => Int }) id: number,
+  ): Promise<User> {
+    return this.userService.update({ ...user, id });
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation(() => Boolean)
   async delete(
     @Args({ name: 'id', type: () => Int }) id: number,
   ): Promise<boolean> {

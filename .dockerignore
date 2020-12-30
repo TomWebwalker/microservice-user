@@ -5,3 +5,5 @@ Dockerfile
 README.md
 nest-cli.json
 docker-compose.yml
+.github
+coverage

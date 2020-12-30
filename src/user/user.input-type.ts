@@ -3,7 +3,7 @@ import { UserEntity } from './user.entity';
 
 @InputType()
 export class UserInput implements UserEntity {
-    
+
     @Field()
     name: string;
     
