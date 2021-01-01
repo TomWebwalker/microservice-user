@@ -9,8 +9,15 @@ import { UserInput } from './user.input-type';
 export class UserService extends EntityService<UserEntity, UserInput> {
   constructor(
     @Inject(USER_REPOSITORY)
-    userRepository: Repository<UserEntity>,
+    private userRepository: Repository<UserEntity>,
   ) {
     super(userRepository);
+  }
+
+  async findByEmailAndPassword(
+    email: string,
+    password: string,
+  ): Promise<UserEntity> {
+    return this.userRepository.findOne({ where: { email, password } });
   }
 }
